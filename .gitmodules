@@ -155,7 +155,7 @@
 
 [submodule "mom"]
 	path = components/mom
-	url = https://github.com/ESCOMP/MOM_interface
-	fxDONOTUSEurl = https://github.com/ESCOMP/MOM_interface
+	url = https://github.com/mnlevy1981/MOM_interface
+	fxDONOTUSEurl = https://github.com/mnlevy1981/MOM_interface
         fxrequired = ToplevelRequired
-        fxtag = mi_240522
+        fxtag = stoch_physics_02
