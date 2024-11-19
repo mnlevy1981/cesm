@@ -1,0 +1,30 @@
+on:
+  push:
+    branches: [ master, cesm3.0-alphabranch ]
+  pull_request:
+    branches: [ master, cesm3.0-alphabranch ]
+jobs:
+  preview_namelists:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Lots of python versions, pare down if we don't support a version
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        config: [{"compset": "BLT1850",        "res": "ne30pg3_t232"},
+                 {"compset": "C_JRA",          "res": "TL319_t232"},
+                 {"compset": "D",              "res": null}
+                 {"compset": "FTJ16",          "res": null},
+                 {"compset": "I2000Clm60SpRs", "res": null}]
+    steps:
+      - id: checkout-CESM
+        uses: actions/checkout@v4
+      - id: Setup python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - id: Create new case, run case.setup, and then preview namelists
+        run: |
+          cd $GITHUB_WORKSPACE/cime/scripts
+          ./create_newcase --run-unsupported --compset ${{ matrix.config.compset }} --res ${{ matrix.config.res }} --case $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.config.python-version }}
+          cd $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.config.python-version }}
+          ./preview_namelists
