@@ -5,7 +5,7 @@ on:
     branches: [ master, cesm3.0-alphabranch ]
 
 env:
-    ESMFMKFILE: $HOME/esmf.mk
+    ESMFMKFILE: $GITHUB_WORKSPACE/esmf.mk
 jobs:
   preview_namelists:
     runs-on: ubuntu-latest
@@ -23,10 +23,10 @@ jobs:
 
       - name: Set up non-python environment (need xmllint and a fake ESMF make file)
         run: |
-          sudo apt-get install libxml2-utils
           git config --global user.email "testing@github.actions"
           git config --global user.name "Github Actions Testing"
           echo "ESMF_VERSION_STRING=8.7.0" > $ESMFMKFILE
+          sudo apt-get install libxml2-utils
 
 
       - name: Checkout CESM
