@@ -16,13 +16,14 @@ jobs:
                  {"compset": "FTJ16",          "res": null},
                  {"compset": "I2000Clm60SpRs", "res": null}]
     steps:
-      - id: checkout-CESM
-        uses: actions/checkout@v4
-      - id: Setup python ${{ matrix.python-version }}
+      - uses: actions/checkout@v4
+
+      - name: Setup python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - id: Create new case, run case.setup, and then preview namelists
+
+      - name: Create new case, run case.setup, and then preview namelists
         run: |
           $GITHUB_WORKSPACE/bin/git-fleximod update
           cd $GITHUB_WORKSPACE/cime/scripts
