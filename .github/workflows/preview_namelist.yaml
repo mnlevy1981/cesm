@@ -27,7 +27,7 @@ jobs:
         run: |
           $GITHUB_WORKSPACE/bin/git-fleximod update
           cd $GITHUB_WORKSPACE/cime/scripts
-          ./create_newcase --run-unsupported --compset ${{ matrix.config.compset }} --res ${{ matrix.config.res }} --case $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.config.python-version }}
-          cd $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.config.python-version }}
+          ./create_newcase --run-unsupported --compset ${{ matrix.config.compset }} --res ${{ matrix.config.res }} --case $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.python-version }}
+          cd $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.python-version }}
           ./case.setup
           ./preview_namelists
