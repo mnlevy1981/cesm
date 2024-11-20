@@ -42,6 +42,6 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/cime/scripts
           ./create_newcase --run-unsupported --mach ubuntu-latest --compset ${{ matrix.config.compset }} --res ${{ matrix.config.res }} --case $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.python-version }}
-          cd $GITHUB_WORKSPACE/cases/BLT1850_${{ matrix.python-version }}
+          cd $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.python-version }}
           ./case.setup
           ./preview_namelists
