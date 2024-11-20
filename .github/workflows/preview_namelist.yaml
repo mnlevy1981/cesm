@@ -18,11 +18,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Set up non-python environment (need xmllint)
+      - name: Set up non-python environment (need xmllint and a fake ESMF make file)
         run: |
           sudo apt-get install libxml2-utils
           git config --global user.email "testing@github.actions"
           git config --global user.name "Github Actions Testing"
+          export ESMFMKFILE=$HOME/esmf.mk
+          echo "ESMF_VERSION_STRING=8.7.0" > $ESMFMKFILE
+
 
       - name: Checkout CESM
         run: |
