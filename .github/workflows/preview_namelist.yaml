@@ -21,6 +21,8 @@ jobs:
       - name: Set up non-python environment (need xmllint)
         run: |
           sudo apt-get install libxml2-utils
+          git config --global user.email "testing@github.actions"
+          git config --global user.name "Github Actions Testing"
 
       - name: Checkout CESM
         run: |
