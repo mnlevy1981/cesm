@@ -3,6 +3,9 @@ on:
     branches: [ master, cesm3.0-alphabranch, add_preview_namelist_CI ]
   pull_request:
     branches: [ master, cesm3.0-alphabranch ]
+
+env:
+    ESMFMKFILE: $HOME/esmf.mk
 jobs:
   preview_namelists:
     runs-on: ubuntu-latest
@@ -23,7 +26,6 @@ jobs:
           sudo apt-get install libxml2-utils
           git config --global user.email "testing@github.actions"
           git config --global user.name "Github Actions Testing"
-          export ESMFMKFILE=$HOME/esmf.mk
           echo "ESMF_VERSION_STRING=8.7.0" > $ESMFMKFILE
 
 
