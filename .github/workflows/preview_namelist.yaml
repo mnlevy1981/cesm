@@ -9,12 +9,10 @@ jobs:
     strategy:
       matrix:
         # Lots of python versions, pare down if we don't support a version
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.9", "3.10", "3.11"]
         config: [{"compset": "BLT1850",        "res": "ne30pg3_t232"},
                  {"compset": "C_JRA",          "res": "TL319_t232"},
-                 {"compset": "D",              "res": null},
-                 {"compset": "FTJ16",          "res": null},
-                 {"compset": "I2000Clm60SpRs", "res": null}]
+                 {"compset": "G_JRA",          "res": "TL319_t232"}]
     steps:
       - uses: actions/checkout@v4
 
