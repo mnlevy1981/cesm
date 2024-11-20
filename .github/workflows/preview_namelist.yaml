@@ -18,10 +18,16 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Create new case, run case.setup, and then preview namelists
+      - name: Set up non-python environment (need xmllint)
         run: |
-          sudo apt-get install xmllint
+          sudo apt-get install libxml2-utils
+
+      - name: Checkout CESM
+        run: |
           $GITHUB_WORKSPACE/bin/git-fleximod update
+
+      - name: Create new cases, run case.setup, and then preview namelists
+        run: |
           cd $GITHUB_WORKSPACE/cime/scripts
           ./create_newcase --run-unsupported --compset BLT1850 --res ne30pg3_t232 --case $GITHUB_WORKSPACE/cases/BLT1850_${{ matrix.python-version }}
           cd $GITHUB_WORKSPACE/cases/BLT1850_${{ matrix.python-version }}
