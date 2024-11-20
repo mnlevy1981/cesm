@@ -5,7 +5,7 @@ on:
     branches: [ master, cesm3.0-alphabranch ]
 
 env:
-    ESMFMKFILE: ~/esmf.mk
+    ESMFMKFILE: ${{ env.HOME }}/esmf.mk
 jobs:
   preview_namelists:
     runs-on: ubuntu-latest
