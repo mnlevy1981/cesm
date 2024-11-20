@@ -25,6 +25,7 @@ jobs:
         run: |
           git config --global user.email "testing@github.actions"
           git config --global user.name "Github Actions Testing"
+          echo "ESMFMKFILE is $ESMFMKFILE"
           echo "ESMF_VERSION_STRING=8.7.0" > $ESMFMKFILE
           sudo apt-get install libxml2-utils
 
