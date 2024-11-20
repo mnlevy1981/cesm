@@ -20,7 +20,7 @@ jobs:
 
       - name: Create new case, run case.setup, and then preview namelists
         run: |
-          pip install xmllint
+          sudo apt-get install xmllint
           $GITHUB_WORKSPACE/bin/git-fleximod update
           cd $GITHUB_WORKSPACE/cime/scripts
           ./create_newcase --run-unsupported --compset BLT1850 --res ne30pg3_t232 --case $GITHUB_WORKSPACE/cases/BLT1850_${{ matrix.python-version }}
