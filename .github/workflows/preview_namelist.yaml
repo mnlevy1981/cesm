@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ master, cesm3.0-alphabranch ]
+    branches: [ master, cesm3.0-alphabranch, add_preview_namelist_CI ]
   pull_request:
     branches: [ master, cesm3.0-alphabranch ]
 jobs:
