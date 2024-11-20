@@ -4,8 +4,6 @@ on:
   pull_request:
     branches: [ master, cesm3.0-alphabranch ]
 
-env:
-    ESMFMKFILE: ${{ env.HOME }}/esmf.mk
 jobs:
   preview_namelists:
     runs-on: ubuntu-latest
@@ -25,6 +23,8 @@ jobs:
         run: |
           git config --global user.email "testing@github.actions"
           git config --global user.name "Github Actions Testing"
+          echo "HOME is $HOME"
+          echo "ESMFMKFILE=$HOME/esmf.mk" >> ${GITHUB_ENV}
           echo "ESMFMKFILE is $ESMFMKFILE"
           echo "ESMF_VERSION_STRING=8.7.0" > $ESMFMKFILE
           sudo apt-get install libxml2-utils
