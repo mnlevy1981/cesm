@@ -8,9 +8,14 @@ jobs:
   preview_namelists:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         # Lots of python versions, pare down if we don't support a version
         python-version: ["3.9", "3.10", "3.11"]
+        config:
+          - {"compset": "C_JRA", "res": "TL319_t232"}
+          - {"compset": "G_JRA", "res": "TL319_t232"}
+          - {"compset": "BLT1850", "res": "ne30pg3_t232"}
     steps:
       - uses: actions/checkout@v4
 
@@ -36,17 +41,7 @@ jobs:
       - name: Create new cases, run case.setup, and then preview namelists
         run: |
           cd $GITHUB_WORKSPACE/cime/scripts
-          ./create_newcase --run-unsupported --mach ubuntu-latest --compset BLT1850 --res ne30pg3_t232 --case $GITHUB_WORKSPACE/cases/BLT1850_${{ matrix.python-version }}
+          ./create_newcase --run-unsupported --mach ubuntu-latest --compset ${{ matrix.config.compset }} --res ${{ matrix.config.res }} --case $GITHUB_WORKSPACE/cases/${{ matrix.config.compset }}_${{ matrix.python-version }}
           cd $GITHUB_WORKSPACE/cases/BLT1850_${{ matrix.python-version }}
-          ./case.setup
-          ./preview_namelists
-          cd $GITHUB_WORKSPACE/cime/scripts
-          ./create_newcase --run-unsupported --mach ubuntu-latest --compset C_JRA --res TL319_t232 --case $GITHUB_WORKSPACE/cases/C_JRA_${{ matrix.python-version }}
-          cd $GITHUB_WORKSPACE/cases/C_JRA_${{ matrix.python-version }}
-          ./case.setup
-          ./preview_namelists
-          cd $GITHUB_WORKSPACE/cime/scripts
-          ./create_newcase --run-unsupported --mach ubuntu-latest --compset G_JRA --res TL319_t232 --case $GITHUB_WORKSPACE/cases/G_JRA_${{ matrix.python-version }}
-          cd $GITHUB_WORKSPACE/cases/G_JRA_${{ matrix.python-version }}
           ./case.setup
           ./preview_namelists
