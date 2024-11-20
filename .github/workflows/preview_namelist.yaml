@@ -23,15 +23,14 @@ jobs:
         run: |
           git config --global user.email "testing@github.actions"
           git config --global user.name "Github Actions Testing"
-          echo "HOME is $HOME"
           echo "ESMFMKFILE=$HOME/esmf.mk" >> ${GITHUB_ENV}
-          echo "ESMF_VERSION_STRING=8.7.0" > ${HOME}/esmf.mk
+          echo "ESMF_VERSION_MAJOR=8" > ${HOME}/esmf.mk
+          echo "ESMF_VERSION_MINOR=8" >> ${HOME}/esmf.mk
           sudo apt-get install libxml2-utils
 
 
       - name: Checkout CESM
         run: |
-          echo "ESMFMKFILE is $ESMFMKFILE"
           $GITHUB_WORKSPACE/bin/git-fleximod update
 
       - name: Create new cases, run case.setup, and then preview namelists
