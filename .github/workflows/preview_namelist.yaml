@@ -13,9 +13,13 @@ jobs:
         # Lots of python versions, pare down if we don't support a version
         python-version: ["3.9", "3.10", "3.11"]
         config:
-          - {"compset": "C_JRA", "res": "TL319_t232"}
-          - {"compset": "G_JRA", "res": "TL319_t232"}
           - {"compset": "BLT1850", "res": "ne30pg3_t232"}
+          - {"compset": "C_JRA", "res": "TL319_t232"}
+          - {"compset": "DTEST", "res": "TL319_t232"}
+          - {"compset": "FHIST", "res": "f09_f09_mg17"}
+          - {"compset": "G_JRA", "res": "TL319_t232"}
+          - {"compset": "I1850Clm50SpG", "res": "f10_f10_mg37"}
+          - {"compset": "T1850Gg", "res": "f09_g17_gris4"}
     steps:
       - uses: actions/checkout@v4
 
