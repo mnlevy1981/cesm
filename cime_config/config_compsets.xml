@@ -47,6 +47,28 @@
     <science_support grid="f19_g17"/>
   </compset>
 
+  <!-- Same as B1850, but with MCOM for ocean (and no ecosys tracers) -->
+
+  <compset>
+    <alias>B1850MCOM_NOECO</alias>
+    <lname>1850_CAM60_CLM50%BGC-CROP_CICE_POP2%MCOM_MOSART_CISM2%NOEVOLVE_WW3_BGC%BDRD</lname>
+    <science_support grid="f09_g17_gl4"/>
+    <science_support grid="f09_g17"/>
+    <science_support grid="f19_g17_gl4"/>
+    <science_support grid="f19_g17"/>
+  </compset>
+
+  <!-- Same as B1850, but with MCOM for ocean (and no ecosys tracers) -->
+
+  <compset>
+    <alias>B1850MCOM</alias>
+    <lname>1850_CAM60_CLM50%BGC-CROP_CICE_POP2%MCOM%ECO%ABIO-DIC_MOSART_CISM2%NOEVOLVE_WW3_BGC%BDRD</lname>
+    <science_support grid="f09_g17_gl4"/>
+    <science_support grid="f09_g17"/>
+    <science_support grid="f19_g17_gl4"/>
+    <science_support grid="f19_g17"/>
+  </compset>
+
   <!-- Same as B1850, but with cmip6-related modifiers for some components -->
   <compset>
     <alias>B1850cmip6</alias>
@@ -609,26 +631,28 @@
    <entry id="CLM_NAMELIST_OPTS">
      <values match="first">
 	<!-- Need because ref case did not include CLM wetland masking fix -->
-	<value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60_CLM50%BGC-CROP.*_CICE.*_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3_BGC%BPRP">use_init_interp=.true.</value>
+	<value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60_CLM50%BGC-CROP.*_CICE.*_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3_BGC%BPRP">use_init_interp=.true.</value>
 
 	<!-- Need because ref case is non-transient; also need for compsets without
 	     CMIP6DECK CLM option because ref case has virtual Antarctica glaciers -->
-	<value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="HIST_CAM60_CLM50%BGC-CROP.*_CICE.*_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3_BGC%BPRP">use_init_interp=.true.</value>
+	<value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="HIST_CAM60_CLM50%BGC-CROP.*_CICE.*_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3_BGC%BPRP">use_init_interp=.true.</value>
 
+       <!-- New MCOM compset does not need use_finidat_areas -->
+       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60_CLM50%BGC-CROP_CICE.*_POP2%[^_]*MCOM.*_MOSART_CISM2%NOEVOLVE_WW3" >use_init_interp=.true.</value>
        <!-- Need to use init_interp for compssets without CLM option CMIP6DECK
 	    because ref case has virtual Antarctica glaciers. So this is required
 	    to get identical answers -->
-       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60_CLM50%BGC-CROP_CICE.*_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3" >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
-       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60%WCTS_CLM50%BGC-CROP_CICE_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3"    >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
-       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="HIST_CAM60%WCTS_CLM50%BGC-CROP_CICE_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3"    >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
-       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="SSP[0-9]+_CAM60_CLM50%BGC-CROP_CICE_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3"       >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
-       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="HIST_CAM60_CLM50%BGC-CROP_CICE.*_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
-	<value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="_CAM60%WCSC_CLM50%BGC-CROP.*_CICE.*_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.</value>
+       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60_CLM50%BGC-CROP_CICE.*_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3" >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
+       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60%WCTS_CLM50%BGC-CROP_CICE_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3"    >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
+       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="HIST_CAM60%WCTS_CLM50%BGC-CROP_CICE_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3"    >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
+       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="SSP[0-9]+_CAM60_CLM50%BGC-CROP_CICE_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3"       >use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
+       <value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="HIST_CAM60_CLM50%BGC-CROP_CICE.*_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.  init_interp_method='use_finidat_areas'</value>
+	<value grid="a%0.9x1.25_l%0.9x1.25_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="_CAM60%WCSC_CLM50%BGC-CROP.*_CICE.*_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.</value>
 
-	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60%(4xCO2|1PCT)_CLM50%BGC-CROP-CMIP6DECK_CICE%CMIP6_POP2%ECO%ABIO-DIC_MOSART_CISM2%NOEVOLVE_WW3_BGC%BDRD">use_init_interp=.true.</value>
-	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60%WCCM%(4xCO2|1PCT)_CLM50%BGC-CROP-CMIP6WACCMDECK_CICE%CMIP6_POP2%ECO%NDEP_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.</value>
-	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="_CAM60_CLM50%BGC-CROP_CICE_POP2%ECO%ABIO-DIC_MOSART_CISM2%NOEVOLVE_WW3_BGC%BDRD">use_init_interp=.true.</value>
-	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="_CAM60%WCCM_CLM50%BGC-CROP.*_CICE.*_POP2%ECO.*_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.</value>
+	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60%(4xCO2|1PCT)_CLM50%BGC-CROP-CMIP6DECK_CICE%CMIP6_POP2%[^_]*ECO%ABIO-DIC_MOSART_CISM2%NOEVOLVE_WW3_BGC%BDRD">use_init_interp=.true.</value>
+	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="1850_CAM60%WCCM%(4xCO2|1PCT)_CLM50%BGC-CROP-CMIP6WACCMDECK_CICE%CMIP6_POP2%[^_]*ECO%NDEP_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.</value>
+	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="_CAM60_CLM50%BGC-CROP_CICE_POP2%[^_]*ECO%ABIO-DIC_MOSART_CISM2%NOEVOLVE_WW3_BGC%BDRD">use_init_interp=.true.</value>
+	<value grid="a%1.9x2.5_l%1.9x2.5_oi%gx1v7_r%r05_g%gland4_w%ww3a_m%gx1v7" compset="_CAM60%WCCM_CLM50%BGC-CROP.*_CICE.*_POP2%[^_]*ECO.*_MOSART_CISM2%NOEVOLVE_WW3">use_init_interp=.true.</value>
      </values>
    </entry>
 
