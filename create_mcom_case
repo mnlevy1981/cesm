@@ -11,9 +11,9 @@
 ###########################
 
 COMPSET=B1850MCOM_NOECO
-CASE="b.e215.${COMPSET}.f09_g17.gterm_test.004"
+CASE="b.e215.${COMPSET}.f09_g17.gterm_test.003"
 REST_STAGING_DIR="/glade/campaign/cesm/development/cvcwg/cvwg/b.e21.B1850.f09_g17.1dpop2/b.e21.B1850.f09_g17.1dpop2-restoring.003/rest/0011-01-01-00000/"
-CASEROOT="/glade/work/mlevy/codes/CESM/cesm2.1.5_pencil/cases/${CASE}"
+CASEROOT="cases/${CASE}"
 #PROJECT=P93300313
 PROJECT=P93300606
 
