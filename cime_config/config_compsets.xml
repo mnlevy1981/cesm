@@ -58,6 +58,17 @@
     <science_support grid="f19_g17"/>
   </compset>
 
+  <!-- Same as B1850MCOM_NOECO, but configured for restoring run -->
+
+  <compset>
+    <alias>B1850MCOM_REST</alias>
+    <lname>1850_CAM60_CLM50%BGC-CROP_CICE_POP2%MCOM-REST_MOSART_CISM2%NOEVOLVE_WW3_BGC%BDRD</lname>
+    <science_support grid="f09_g17_gl4"/>
+    <science_support grid="f09_g17"/>
+    <science_support grid="f19_g17_gl4"/>
+    <science_support grid="f19_g17"/>
+  </compset>
+
   <!-- Same as B1850, but with MCOM for ocean (and no ecosys tracers) -->
 
   <compset>

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Created by Ivan Lima on Wed Jan 26 07:01:33 MST 2022
+# Modified by Mike Levy spring 2026
+# 1D preindustrial control run with T, S, U & V restoring and EBM turned off
+
+COMPSET=B1850MCOM_REST
+CASE="b.e215.${COMPSET}.f09_g17.mcom-restoring"
+REST_STAGING_DIR="/glade/campaign/cesm/cesmdata/inputdata/cesm2_init/b.e21.B1850.f09_g17.CMIP6-piControl.001/1161-01-01/"
+CASEROOT="cases/${CASE}"
+#PROJECT=P93300313
+PROJECT=P93300606
+
+##########################################
+# User should not need to change further #
+##########################################
+
+CESMROOT=`pwd -P .`
+
+# create case
+if [ ! -d "$CASEROOT" ]
+then
+    ${CESMROOT}/cime/scripts/create_newcase --case ${CASEROOT} \
+                                            --compset ${COMPSET} \
+                                            --res f09_g17 \
+                                            --machine derecho \
+                                            --project ${PROJECT}
+
+    cd ${CASEROOT}
+    ./xmlchange STOP_OPTION=nmonths
+    ./xmlchange STOP_N=1
+    ./xmlchange DOUT_S_SAVE_INTERIM_RESTART_FILES=TRUE
+    # ./xmlchange DOUT_S_ROOT="/glade/campaign/cesm/development/cvcwg/cvwg/\$CASE"
+    ./xmlchange RUN_TYPE=hybrid
+    ./xmlchange RUN_REFCASE=b.e21.B1850.f09_g17.CMIP6-piControl.001
+    ./xmlchange RUN_REFDATE=1161-01-01
+    ./xmlchange GET_REFCASE=FALSE
+    #---------------------------------------------------------------------------
+    ./case.setup
+    #---------------------------------------------------------------------------
+fi
+
+# prestage restart files from REFCASE
+if [ -d "$RUNDIR" ]
+then
+    cp -uv /glade/work/jshin/ivan/Restarts/b.e21.B1850.f09_g17.CMIP6-piControl.001/1161-01-01-00000/* ${RUNDIR}/run
+fi
+
+./preview_namelists
