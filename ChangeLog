@@ -1,3 +1,57 @@
+==============================================================
+Tag name: cesm3_0_beta09
+Originator(s): CSEG
+Date: 4th August 2026
+One-line Summary: Component updates
+
+Answer Changes introduced with this tag when compared to cesm0_0_beta08:
+CAM
+	Fix energy bugs in physics-dynamics coupling, RRTMGP
+	diagnostics, and ZM scheme
+	Aqueous chemistry fixes
+	MTt4s namelist defaults
+	CLUBB update and clubb_intr improvements
+	Implement POLARCAP & NATL grids + L58/L93 inic for all SE-VR grids + ne120pg3
+	Update MPAS dynamical core to version 8.4.0
+CTSM
+	Answers change more than roundoff for hillslope hydrology cases.
+	Update CLM6 paramfiles for uncoupled and coupled cases, plus add new paramfile for hillslope hydrology cases.
+	bug fix to the FATES land use driver input code
+	FATES update fixing some failing LUH2 tests
+mizuRoute
+	Some changes to answers with science bug-fixes
+CISM
+	Add support for the ERP test.  Causes answer changes for active CISM
+MOM6 
+	Latest MOM6 configuration changes
+	Use ice heat capacity and fixed temperature for ice runoff enthalpy PRs #647.
+	Bring in latest MARBL tuning and support
+CMEPS
+	Add water tracers.  Changes answers for X compsets.
+	Reduce the memory usage.  Answer changes for lnd2rof mapping file.
+
+mizuRoute
+	Some changes to answers with science bug-fixes
+
+
+Problems identified after tag creation:
+
+BHISTC_LT_DART test failing due to misconfiguration.
+FAIL ERP_Ln9.f09_f09_mg17.FCnudged_GC.derecho_intel.cam-outfrq9s COMPARE_base_rest
+FAIL SSPMATRIXCN_Ly5_Mmpi-serial.1x1_numaIA.I2000Clm60BgcCropQianRs.derecho_intel.clm-ciso_monthly RUN time=3682 
+FAIL ERR_Ld5.ne30pg3_t232.BLT1850.derecho_gnu.allactive-defaultio TPUTCOMP Could not get default throughput
+     med.log not being saved to baselines
+FAIL LILACSMOKE_D_Ld2.f10_f10_mg37.I2000Ctsm50NwpSpAsRs.derecho_intel.clm-lilac MODEL_BUILD time=0
+     Only works with ctsm stand alone clone.
+
+FAIL ERP_D_Ln9.C48_C48_mg17.QPC6.derecho_intel.cam-outfrq9s SHAREDLIB_BUILD failed to initialize
+                Issue with FMS version support between cam and mom
+FAIL PET_PM.ne30pg3_t232.BMT1850.derecho_gnu.allactive-defaultiomi RUN time=329
+FAIL PET_PM.ne30pg3_t232.BMT1850.derecho_intel.allactive-defaultiomi RUN time=301
+                Issue with MOM openmp support
+PEND MKSURFDATAESMF_P128x1.f10_f10_mg37.I1850Clm50BgcCrop.derecho_intel SHAREDLIB_BUILD RERUN
+                Issue with special enviroment being needed
+
 ============================================================
 Tag name: cesm3_0_alpha09g
 Originator(s): CSEG
